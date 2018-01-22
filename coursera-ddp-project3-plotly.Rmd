@@ -1,0 +1,76 @@
+---
+title: "Motor Trend Data"
+author: "James Canterbury"
+date: "1/22/2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, echo = FALSE, 
+                      message = FALSE, warning = FALSE)
+```
+
+## Introduction
+
+- This project was created as part of the Developing Data Products course of the Coursera [Data Science Specialisation](https://www.coursera.org/specializations/jhu-data-science).
+
+- The goal of the project is to create a web page presentation using R Markdown that features a plot created with Plotly, and to host the resulting web page on either GitHub Pages, RPubs, or NeoCities.
+
+- The interactive plot on the next slide illustraties the relationship between MPG and Horsepower for the Mtcard dataset.
+  
+
+
+```{r prerequisites}
+library(dplyr)
+library(tibble)
+library(plotly)
+```
+
+
+## Motor Trend Mtcars Data : HP and MPG Relationship
+```{r load_data, }
+mtcars1 <- subset(mtcars, select = c( hp, mpg))
+
+
+
+
+font  <- list(  family = "Arial",   size = 16,  color = "#7f7f7f")
+xAxis <- list(  title = "Horsepower",    titlefont = font)
+yAxis <- list(  title = "MPG",               titlefont = font)
+
+
+plotly_plot<-plot_ly(mtcars1, x = ~hp, y= ~mpg ,  type="bar", mode="lines") %>% 
+  layout(xaxis = xAxis, yaxis = yAxis
+         ,legend= list(x = 1 ,    y = 1 ,  bgcolor = "#F3F3F3" ))
+
+suppressMessages(suppressWarnings(plotly_plot))
+
+
+```
+
+
+
+## Notes
+
+### Source code
+
+- The R Markdown source code of this presentation can be found in [this GitHub repository](https://github.com/JamesCanterbury/coursera-ddp-project3-plotly).
+
+
+#### Code is also in text form below
+
+mtcars1 <- subset(mtcars, select = c( hp, mpg))
+
+
+
+
+font  <- list(  family = "Arial",   size = 16,  color = "#7f7f7f")
+xAxis <- list(  title = "Horsepower",    titlefont = font)
+yAxis <- list(  title = "MPG",               titlefont = font)
+
+
+plotly_plot<-plot_ly(mtcars, x = ~hp, y= ~mpg ,  type="bar", mode="lines") %>% 
+  layout(xaxis = xAxis, yaxis = yAxis
+         ,legend= list(x = 1 ,    y = 1 ,  bgcolor = "#F3F3F3" ))
+
+suppressMessages(suppressWarnings(plotly_plot))
